@@ -1,5 +1,7 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -16,9 +18,33 @@ namespace VIZSGA_KOROM
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Auto> Cars { get; set; } = new();
         public MainWindow()
         {
             InitializeComponent();
+            ReadFile("autok.csv");
+
+            /// 5. Feladat
+            lblMain.Content += $"5. Feladat: {Cars.Count} autó található a listában.\n";
+
+        }
+        public void ReadFile(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                var lines = File.ReadAllLines(filePath).ToList();
+
+                lines.RemoveAt(0);
+
+                foreach (var line in lines)
+                {
+                    Cars.Add(new Auto(line));
+                }
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
         }
     }
 }
