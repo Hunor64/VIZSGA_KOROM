@@ -17,5 +17,17 @@ namespace VIZSGA_KOROM
         public int EladottDarabszam { get; set; }
         public int AtlagosEladásiAr { get; set; }
 
+        public Auto(string line)
+        {
+            var data = line.Split(';');
+            Sorszam = int.Parse(data[0]);
+            Marka = data[1];
+            Modell = data[2];
+            GyartasiEv = int.Parse(data[3]);
+            Szin = data[4];
+            EladottDarabszam = int.Parse(data[5]);
+            AtlagosEladásiAr = int.Parse(data[6]);
+        }
+
     }
 }
