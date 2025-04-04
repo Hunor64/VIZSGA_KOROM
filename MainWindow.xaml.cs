@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -19,15 +20,28 @@ namespace VIZSGA_KOROM
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Auto> Cars { get; set; } = new();
+        ObservableCollection<Auto> Cars { get; set; } = new();
+        bool Console = false;
         public MainWindow()
         {
             InitializeComponent();
-            //Konzol
-            //ReadFile("autok.csv");
-            //ConsoleFeladat();
+            if (Console)
+            {
+                //Konzol
+                ReadFile("autok.csv");
+                ConsoleFeladat();
+                lsbMain.Visibility = Visibility.Collapsed;
+                btnBezar.Visibility = Visibility.Collapsed;
+                btnLoad.Visibility = Visibility.Collapsed;
+                dtgMain.Visibility = Visibility.Collapsed;
+                stpYear.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                lblMain.Visibility = Visibility.Collapsed;
+            }
 
-            //WPF
+
 
         }
         public void ReadFile(string filePath)
@@ -89,6 +103,25 @@ namespace VIZSGA_KOROM
             if (ofd.ShowDialog() == true)
             {
                 ReadFile(ofd.FileName);
+                dtgMain.ItemsSource = Cars;
+            }
+        }
+
+        private void btnBezar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txbYear_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            lsbMain.Items.Clear();
+
+            if (txbYear.Text != "")
+            {
+                foreach (var car in Cars.Where(x => x.GyartasiEv == int.Parse(txbYear.Text))) 
+                {
+                    lsbMain.Items.Add($"{car.Marka} {car.Modell}");
+                }
             }
         }
     }
