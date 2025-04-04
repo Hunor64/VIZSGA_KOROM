@@ -31,6 +31,18 @@ namespace VIZSGA_KOROM
             double osszesEladas = Cars.Select(x => x.EladottDarabszam).Average();
             lblMain.Content += $"6. Feladat: Az autók esetében az átlagosan eladott darabszám {Math.Round(osszesEladas,1)}\n";
 
+            /// 7. Feladat
+            lblMain.Content += ("7. feladat: Az elmúlt 5 évben gyártott autók:\n");
+
+            int currentYear = DateTime.Now.Year;
+
+            foreach (var item in Cars)
+            {
+                if (item.GyartasiEv > currentYear - 5)
+                {
+                    lblMain.Content += $"\t- {item.Marka} {item.Modell}: {item.GyartasiEv}\n";
+                }
+            }
         }
         public void ReadFile(string filePath)
         {
