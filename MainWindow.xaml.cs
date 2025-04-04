@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Microsoft.Win32;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Automation;
@@ -22,9 +23,11 @@ namespace VIZSGA_KOROM
         public MainWindow()
         {
             InitializeComponent();
-            ReadFile("autok.csv");
+            //Konzol
+            //ReadFile("autok.csv");
+            //ConsoleFeladat();
 
-            ConsoleFeladat();
+            //WPF
 
         }
         public void ReadFile(string filePath)
@@ -78,6 +81,15 @@ namespace VIZSGA_KOROM
                 lblMain.Content += $"\t- {manufacturer}: {Cars.Where(x => x.Marka == manufacturer).Select(x => x.EladottDarabszam).Sum()} darab\n";
             }
 
+        }
+
+        private void btnLoad_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new();
+            if (ofd.ShowDialog() == true)
+            {
+                ReadFile(ofd.FileName);
+            }
         }
     }
 }

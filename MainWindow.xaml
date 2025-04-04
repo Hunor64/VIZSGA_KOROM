@@ -5,10 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VIZSGA_KOROM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Auto" Height="450" Width="800">
     <Grid>
         <StackPanel>
-            <Label x:Name="lblMain"/>
+                <!--Konzol-->
+                <Label x:Name="lblMain" Height="Auto"/>
+                
+                <!--WPF-->
+                <Button Content="Betölt" x:Name="btnLoad" Click="btnLoad_Click"/>
+
+            
+            
         </StackPanel>
     </Grid>
 </Window>
