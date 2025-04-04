@@ -27,6 +27,10 @@ namespace VIZSGA_KOROM
             /// 5. Feladat
             lblMain.Content += $"5. Feladat: {Cars.Count} autó található a listában.\n";
 
+            /// 6. Feladat
+            double osszesEladas = Cars.Select(x => x.EladottDarabszam).Average();
+            lblMain.Content += $"6. Feladat: Az autók esetében az átlagosan eladott darabszám {Math.Round(osszesEladas,1)}\n";
+
         }
         public void ReadFile(string filePath)
         {
